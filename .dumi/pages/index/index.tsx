@@ -93,3 +93,12 @@ const Homepage: React.FC = () => {
 };
 
 export default Homepage;
+if (typeof window !== 'undefined')
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'c') {
+      const selection = document.getSelection();
+      if (!selection || !selection.toString()) return;
+      const text = selection.toString();
+      window.parent.postMessage({ eventType: 'copy', text }, '*');
+    }
+  });
